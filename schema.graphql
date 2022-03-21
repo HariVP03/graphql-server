@@ -2,18 +2,35 @@ type Book {
   id: ID!
   title: String!
   author: String!
+  library: Library
 }
 
 type Library {
   id: ID!
   name: String!
   books: [Book]!
+  city: City
 }
 
 type City {
   id: ID!
   name: String!
   libraries: [Library]!
+}
+
+input addBooksInput {
+  title: String!
+  author: String!
+  libraryId: String!
+}
+
+input addLibraryInput {
+  name: String!
+  cityId: String!
+}
+
+input addCityInput {
+  name: String!
 }
 
 type Query {
@@ -23,4 +40,10 @@ type Query {
   getLibraryById(id: String!): Library!
   getCities: [City]!
   getCityById(id: String!): City!
+}
+
+type Mutation {
+  addBook(data: addBooksInput): Book!
+  addLibrary(data: addLibraryInput): Library!
+  addCity(data: addCityInput): City!
 }

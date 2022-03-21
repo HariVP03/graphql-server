@@ -7,3 +7,25 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model Book {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  author    String
+  Library   Library? @relation(fields: [libraryId], references: [id])
+  libraryId String?  @db.ObjectId
+}
+
+model Library {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  books  Book[]
+  City   City?   @relation(fields: [cityId], references: [id])
+  cityId String? @db.ObjectId
+}
+
+model City {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  libraries Library[]
+}
