@@ -1,0 +1,26 @@
+type Book {
+  id: ID!
+  title: String!
+  author: String!
+}
+
+type Library {
+  id: ID!
+  name: String!
+  books: [Book]!
+}
+
+type City {
+  id: ID!
+  name: String!
+  libraries: [Library]!
+}
+
+type Query {
+  getBooks: [Book]!
+  getBookById(id: String!): Book!
+  getLibraries: [Library]!
+  getLibraryById(id: String!): Library!
+  getCities: [City]!
+  getCityById(id: String!): City!
+}
